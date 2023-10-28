@@ -58,7 +58,11 @@ bool allow_neogeo_mode = true;
 bool bVerticalMode = false;
 bool bAllowDepth32 = false;
 UINT32 nFrameskip = 1;
+#if !defined(SF2000)
 INT32 g_audio_samplerate = 48000;
+#else
+INT32 g_audio_samplerate = 11025;
+#endif
 UINT8 *diag_input;
 neo_geo_modes g_opt_neo_geo_mode = NEO_GEO_MODE_MVS;
 
@@ -472,13 +476,21 @@ void check_variables(void)
 			else if (strcmp(var.value, "11025") == 0)
 				g_audio_samplerate = 11025;
 			else
+#if !defined(SF2000)
 				g_audio_samplerate = 48000;
+#else
+				g_audio_samplerate = 11025;
+#endif
 		}
 	}
 	else
 	{
 		// src/burn/drv/neogeo/neo_run.cpp is mentioning issues with ngcd cdda playback if samplerate isn't 44100
+#if !defined(SF2000)
 		g_audio_samplerate = 44100;
+#else
+		g_audio_samplerate = 11025;
+#endif
 	}
 
 	var.key = var_fbneo_sample_interpolation.key;

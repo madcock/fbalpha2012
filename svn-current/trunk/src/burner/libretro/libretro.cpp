@@ -114,8 +114,15 @@ static ROMFIND g_find_list[1024];
 static unsigned g_rom_count;
 static unsigned fba_devices[5] = { RETROPAD_CLASSIC, RETROPAD_CLASSIC, RETROPAD_CLASSIC, RETROPAD_CLASSIC, RETROPAD_CLASSIC };
 
-#define AUDIO_SAMPLERATE 32000
+#if !defined(SF2000)
+#define AUDIO_SAMPLERATE 44100
 #define AUDIO_SEGMENT_LENGTH 534 // <-- Hardcoded value that corresponds well to 32kHz audio.
+#define VIDEO_REFRESH_RATE 59.629403
+#else
+#define AUDIO_SAMPLERATE 11025
+#define AUDIO_SEGMENT_LENGTH 184 // <-- Hardcoded value that corresponds well to 32kHz audio.
+#define VIDEO_REFRESH_RATE 59.629403
+#endif
 
 static uint32_t *g_fba_frame;
 static int16_t g_audio_buf[AUDIO_SEGMENT_LENGTH * 2];
@@ -967,10 +974,14 @@ void retro_get_system_av_info(struct retro_system_av_info *info)
       log_cb(RETRO_LOG_INFO, "retro_get_system_av_info: base_width: %d, base_height: %d, max_width: %d, max_height: %d, aspect_ratio: %f\n", geom.base_width, geom.base_height, geom.max_width, geom.max_height, geom.aspect_ratio);
    }
 
+#if !defined(SF2000)
 #ifdef FBACORES_CPS
-   struct retro_system_timing timing = { 59.629403, 59.629403 * AUDIO_SEGMENT_LENGTH };
+   struct retro_system_timing timing = { VIDEO_REFRESH_RATE, VIDEO_REFRESH_RATE * AUDIO_SEGMENT_LENGTH };
 #else
    struct retro_system_timing timing = { (nBurnFPS / 100.0), (nBurnFPS / 100.0) * AUDIO_SEGMENT_LENGTH };
+#endif
+#else
+   struct retro_system_timing timing = { VIDEO_REFRESH_RATE, AUDIO_SAMPLERATE };
 #endif
 
    info->geometry = geom;

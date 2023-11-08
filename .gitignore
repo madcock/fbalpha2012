@@ -2,3 +2,6 @@
 *.a
 *.o
 *.dll
+svn-current/trunk/ctvmake
+svn-current/trunk/m68kmake
+svn-current/trunk/pgmspritecreate

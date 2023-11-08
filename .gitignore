@@ -5,3 +5,14 @@
 svn-current/trunk/ctvmake
 svn-current/trunk/m68kmake
 svn-current/trunk/pgmspritecreate
+svn-current/trunk/gamelist-gx.txt
+svn-current/trunk/gamelist.txt
+svn-current/trunk/src/dep/generated/app_gnuc.rc
+svn-current/trunk/src/dep/generated/build_details.h
+svn-current/trunk/src/dep/generated/driverlist-gx.h
+svn-current/trunk/src/dep/generated/driverlist.h
+svn-current/trunk/src/dep/generated/driverlist_cps1.h
+svn-current/trunk/src/dep/generated/driverlist_cps2.h
+svn-current/trunk/src/dep/generated/driverlist_cps3.h
+svn-current/trunk/src/dep/generated/driverlist_neogeo.h
+svn-current/trunk/src/dep/generated/license.rtf
